@@ -1,4 +1,5 @@
 [Flatpak Repo]
 Title=helium-repo
-Url=https://shyvortex.github.io/helium-flatpak/
+Url=https://aniruddhgutta.github.io/helium-flatpak
+Homepage=https://github.com/aniruddhgutta/helium-flatpak
 GPGVerify=false
