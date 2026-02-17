@@ -38,16 +38,23 @@ CURRENT_VERSION=$(grep -o 'helium-[0-9]*\.[0-9]*\.[0-9]*\(\.[0-9]*\)\?' "$MANIFE
 
 CURRENT_DATE=$(date '+%Y-%m-%d')
 
+# --- Create temp file with version number ---
+printf "version: %s\nprerelease: %s\n" "$CURRENT_VERSION" "$IS_PRERELEASE" > version.txt
+
 if [ "$CURRENT_VERSION" = "$LATEST_VERSION" ]; then
   echo "   Manifest already up to date ($CURRENT_VERSION). Checking SHA256..."
 else
   echo "   Updating manifest from $CURRENT_VERSION → $LATEST_VERSION"
+  
   # --- Replace version strings ---
   sed "s|helium-linux/releases/download/${CURRENT_VERSION}|helium-linux/releases/download/${LATEST_VERSION}|g" "$MANIFEST_FILE" > "$MANIFEST_FILE.tmp" && mv "$MANIFEST_FILE.tmp" "$MANIFEST_FILE"
   sed "s|helium-${CURRENT_VERSION}-x86_64_linux|helium-${LATEST_VERSION}-x86_64_linux|g" "$MANIFEST_FILE" > "$MANIFEST_FILE.tmp" && mv "$MANIFEST_FILE.tmp" "$MANIFEST_FILE"
   sed "s|helium-${CURRENT_VERSION}\([^-]\)|helium-${LATEST_VERSION}\1|g" "$MANIFEST_FILE" > "$MANIFEST_FILE.tmp" && mv "$MANIFEST_FILE.tmp" "$MANIFEST_FILE"
   sed "s|version=\"${CURRENT_VERSION}\"|version=\"${LATEST_VERSION}\"|g" "$METADATA_FILE" > "$METADATA_FILE.tmp" && mv "$METADATA_FILE.tmp" "$METADATA_FILE"
   sed "s|date=\"[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}\"|date=\"${CURRENT_DATE}\"|g" "$METADATA_FILE" > "$METADATA_FILE.tmp" && mv "$METADATA_FILE.tmp" "$METADATA_FILE"
+  
+  # --- Update version number ---
+  printf "version: %s\nprerelease: %s\n" "$LATEST_VERSION" "$IS_PRERELEASE" > version.txt
 fi
 
 # --- Compute new SHA256 ---
