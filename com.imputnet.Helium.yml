@@ -59,7 +59,6 @@ finish-args:
 
 modules:
   - name: helium
-    metadata: com.imputnet.Helium.xml
     buildsystem: simple
     build-commands:
       - tar -xvf helium-linux-x64.tar.gz
@@ -73,6 +72,7 @@ modules:
       - chmod +x /app/bin/helium
 
       - install -Dm644 com.imputnet.Helium.desktop /app/share/applications/com.imputnet.Helium.desktop
+      - install -Dm644 com.imputnet.Helium.metainfo.xml /app/share/metainfo/com.imputnet.Helium.metainfo.xml
 
       - mkdir -p icons/512x512 icons/256x256 icons/128x128 icons/64x64 icons/32x32
       - cp com.imputnet.Helium.png icons/512x512/
