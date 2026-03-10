@@ -64,8 +64,8 @@ modules:
       - tar -xvf helium-linux-x64.tar.gz
       - mkdir -p /app/lib/helium
       - mkdir -p /app/bin
-      - cp -r helium-0.9.4.1-x86_64_linux/* /app/lib/helium
-      - install -Dm755 helium-0.9.4.1-x86_64_linux/helium /app/lib/helium/helium.real
+      - cp -r helium-0.10.1.1-x86_64_linux/* /app/lib/helium
+      - install -Dm755 helium-0.10.1.1-x86_64_linux/helium /app/lib/helium/helium.real
 
       - echo '#!/bin/sh' > /app/bin/helium
       - echo 'exec /app/lib/helium/helium.real --no-sandbox --test-type "$@"' >> /app/bin/helium
@@ -89,8 +89,8 @@ modules:
 
     sources:
       - type: file
-        url: https://github.com/imputnet/helium-linux/releases/download/0.9.4.1/helium-0.9.4.1-x86_64_linux.tar.xz
-        sha256: a97b8352d6a7938e8ef3b8c04b1733995324d220f825a662da3f4b4817bd5423
+        url: https://github.com/imputnet/helium-linux/releases/download/0.10.1.1/helium-0.10.1.1-x86_64_linux.tar.xz
+        sha256: e10cf7caa6fd0538ac77c5ef1af8082ef99136060142025aaf0e45ddf65e2e56
         dest-filename: helium-linux-x64.tar.gz
       - type: file
         path: com.imputnet.Helium.metainfo.xml
